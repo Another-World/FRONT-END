@@ -1,6 +1,7 @@
+import Header from "./components/sections/header";
 import Button from "./components/ui/Button";
 import SectionHeader from "./components/ui/SectionHeader";
-import Header from "./components/sections/Header";
+
 
 export default function App() {
   return (
