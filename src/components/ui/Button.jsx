@@ -40,9 +40,7 @@ export default function Button({ children, variant = "outline", ...props }) {
       >
         {children}
       </button>
-      <Button variant="outline">Falar conosco</Button>
-      <Button variant="white">Explorar portfólio</Button>
-      <Button variant="solid">Falar conosco →</Button>
+      
     </div>
   );
 }
