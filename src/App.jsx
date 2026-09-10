@@ -1,4 +1,5 @@
 import Header from "./components/sections/header";
+import Hero from "./components/sections/hero";
 import Button from "./components/ui/Button";
 import SectionHeader from "./components/ui/SectionHeader";
 
@@ -8,12 +9,9 @@ export default function App() {
     <div>
 
       <Header />
+      <Hero/>
 
-      <Button variant="outline">Falar conosco</Button>
-      <Button variant="white">Explorar portfólio</Button>
-      <Button variant="solid">Falar conosco →</Button>
-
-      <SectionHeader/>
+      
     </div>
   )
 }
