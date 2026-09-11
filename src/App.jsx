@@ -1,6 +1,8 @@
+import About from "./components/sections/About";
 import Header from "./components/sections/header";
+import Tag from "./components/sections/Tag";
 import Button from "./components/ui/Button";
-import SectionHeader from "./components/ui/SectionHeader";
+
 
 
 export default function App() {
@@ -8,12 +10,15 @@ export default function App() {
     <div>
 
       <Header />
+      <main>
 
+      <About/>
+      </main>
+      <Tag/>
       <Button variant="outline">Falar conosco</Button>
       <Button variant="white">Explorar portfólio</Button>
       <Button variant="solid">Falar conosco →</Button>
 
-      <SectionHeader/>
     </div>
   )
 }
