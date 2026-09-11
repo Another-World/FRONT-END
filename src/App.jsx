@@ -1,24 +1,20 @@
 import About from "./components/sections/About";
-import Header from "./components/sections/header";
-import Hero from "./components/sections/hero";
-import Button from "./components/ui/Button";
-
+import Header from "./components/sections/Header"; 
+import Hero from "./components/sections/Hero";
+import Evolution from "./components/sections/Evolution";
 
 
 export default function App() {
   return (
-    <div>
-
+    <>
       <Header />
+
       <main>
-
-      <About/>
+        <Hero />
+        <About />
+        <Evolution />
       </main>
-      <Tag/>
-      <Button variant="outline">Falar conosco</Button>
-      <Button variant="white">Explorar portfólio</Button>
-      <Button variant="solid">Falar conosco →</Button>
-
-    </div>
-  )
+      
+    </>
+  );
 }

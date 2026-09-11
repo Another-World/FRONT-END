@@ -1,5 +1,5 @@
 import SectionHeader from "../ui/SectionHeader";
-import Tag from "./Tag";
+import Tag from "../ui/Tag";
 
 // Os textos das tags ficam em um array para evitar quatro blocos repetidos.
 const areas = ["Hardware", "Redes", "Web", "Tecnologia"];

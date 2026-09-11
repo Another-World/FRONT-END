@@ -34,13 +34,13 @@ export default function Header() {
 
   return (
     /*
-      <header> é a tag semântica correta para o cabeçalho.
+      <Header> é a tag semântica correta para o cabeçalho.
 
-      sticky top-0 = mantém o header preso no topo durante a rolagem.
-      z-50 = mantém o header na frente das outras seções.
+      sticky top-0 = mantém o Header preso no topo durante a rolagem.
+      z-50 = mantém o Header na frente das outras seções.
       border-b border-border = cria a linha inferior roxa.
       bg-bg-dark/95 = fundo escuro com 95% de opacidade.
-      backdrop-blur = aplica desfoque no conteúdo atrás do header.
+      backdrop-blur = aplica desfoque no conteúdo atrás do Header.
     */
     <header className="sticky top-0 z-50 border-b border-border bg-bg-dark/95 backdrop-blur">
 
