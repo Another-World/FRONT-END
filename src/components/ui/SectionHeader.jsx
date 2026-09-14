@@ -6,10 +6,10 @@ export default function SectionHeader({ number, label }) {
     // "flex flex-col" = empilha os filhos na vertical (column).
     // Se fosse só "flex" ele empilharia na horizontal, lado a lado.
     <div className="flex flex-col gap-2">
-      <span className="text-purple text-xs font-semibold">
+      <span className="text-purple text-2xl font-semibold">
         {number}
       </span>
-      <span className="text-purple text-[10px] font-semibold uppercase tracking-widest">
+      <span className="text-purple text-[28px] font-semibold uppercase tracking-widest">
         {label}
       </span>
     </div>

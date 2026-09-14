@@ -14,13 +14,13 @@ export default function Hero() {
             "px-8" = espaço interno das laterais. */}
 
         {/* Subtítulo roxo */}
-        <p className="text-purple text-xs font-semibold uppercase tracking-widest mb-6">
+        <p className="text-purple text-2xl font-semibold uppercase tracking-widest mb-6">
           Tecnologia — Infraestrutura — Web
         </p>
 
         {/* Título gigante com efeito de duas linhas de cores diferentes */}
         <div className="mb-8">
-          <h1 className="text-white text-7xl md:text-8xl font-bold leading-tight mb-4">
+          <h1 className="text-white text-7xl md:text-8xl font-bold leading-tight -mb-6">
             ANOTHER
           </h1>
           {/* "text-7xl md:text-8xl" = em celular é 3.5rem, em tablet/desktop é 4rem.
