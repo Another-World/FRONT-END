@@ -7,7 +7,6 @@ import Button from "../ui/Button";
 // Array com todos os links do menu.
 // Isso evita repetir os mesmos links no desktop e no mobile.
 const links = [
-  { text: "Portfólio", href: "#portfolio" },
   { text: "Quem somos", href: "#sobre" },
   { text: "Serviços", href: "#servicos" },
   { text: "Projetos", href: "#projetos" },
