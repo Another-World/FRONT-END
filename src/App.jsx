@@ -1,24 +1,19 @@
-import About from "./components/sections/About";
-import Header from "./components/sections/Header"; 
-import Hero from "./components/sections/Hero";
-import Evolution from "./components/sections/Evolution";
-import Services from "./components/sections/Services";
-import Portfolio from "./components/sections/Portfolio";
-
+import { Routes, Route } from "react-router-dom";
+import MainLayout from "./Layouts/MainLayout";
+import QuemSomos from "./pages/Quem-Somos";
+import Servicos from "./pages/Servicos";
+import Contato from "./pages/Contato";
+import Home from "./pages/Home";
 
 export default function App() {
   return (
-    <>
-      <Header />
-
-      <main>
-        <Hero />
-        <About />
-        <Evolution />
-        <Services />
-        <Portfolio />
-      </main>
-      
-    </>
+    <Routes>
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<Home/> } />
+        <Route path="/quem-somos" element={<QuemSomos />} />
+        <Route path="/servicos" element={<Servicos />} />
+        <Route path="/contato" element={<Contato />} />
+      </Route>
+    </Routes>
   );
 }
