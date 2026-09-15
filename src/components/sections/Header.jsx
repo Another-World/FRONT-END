@@ -4,14 +4,22 @@ import { useState } from "react";
 // Importa o botão reutilizável que já foi criado em src/ui/Button.jsx.
 import Button from "../ui/Button";
 
+// Link = navegação do React Router (troca a página sem recarregar o site).
+// useNavigate = permite navegar por código, dentro de um onClick.
+import { Link, useNavigate } from "react-router-dom";
+
 // Array com todos os links do menu.
 // Isso evita repetir os mesmos links no desktop e no mobile.
+//
+// IMPORTANTE: "to" é só o CAMINHO (uma string), nunca o componente da página.
+// Quem decide qual componente renderizar para cada caminho é o App.jsx.
 const links = [
-  { text: "Quem somos", href: "#sobre" },
-  { text: "Serviços", href: "#servicos" },
-  { text: "Projetos", href: "#projetos" },
-  { text: "Contato", href: "#contato" },
-  { text: "Parceiros", href: "#parceiros" },
+  { text: "Quem somos", to: "/quem-somos" },
+  { text: "Serviços", to: "/servicos" },
+  // Projetos não é uma página separada: é a seção <section id="portfolio">
+  // dentro da Home. Por isso o caminho é "/" + a âncora "#portfolio".
+  { text: "Projetos", to: "/#portfolio" },
+  { text: "Contato", to: "/contato" },
 ];
 
 // Todo componente React começa com uma função.
@@ -24,6 +32,10 @@ export default function Header() {
   //
   // setMenuOpen é a função usada para alterar esse valor.
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // navigate("/contato") faz a mesma coisa que clicar em um <Link to="/contato">,
+  // só que a partir de um onClick de botão.
+  const navigate = useNavigate();
 
   // Função para fechar o menu mobile.
   // Vamos usá-la quando o usuário clicar em algum link.
@@ -61,13 +73,13 @@ export default function Header() {
           href="#inicio" levará a pessoa para a seção Hero,
           que depois terá id="inicio".
         */}
-        <a
-          href="#inicio"
+        <Link
+          to="/"
           className="text-[18px] font-bold tracking-[-0.03em] text-white"
           onClick={closeMenu}
         >
           ANOTHER WORLD
-        </a>
+        </Link>
 
         {/*
           Menu desktop.
@@ -85,15 +97,15 @@ export default function Header() {
             e cria um <a> para cada item.
           */}
           {links.map((link) => (
-            <a
+            <Link
               /*
                 key é obrigatório em listas do React.
                 Ele permite que o React identifique cada item.
               */
-              key={link.href}
+              key={link.to}
 
-              // Usa o href definido no array.
-              href={link.href}
+              // Usa o caminho definido no array.
+              to={link.to}
 
               /*
                 text-[10px] = tamanho de texto do Figma.
@@ -104,7 +116,7 @@ export default function Header() {
             >
               {/* Exibe o texto definido no array. */}
               {link.text}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -121,11 +133,10 @@ export default function Header() {
             className="h-11 px-5 text-[10px]"
 
             /*
-              Ao clicar, altera a hash da URL para #contato.
-              Quando a seção Contato for criada com id="contato",
-              a página rolará até ela.
+              Ao clicar, navega para a rota /contato,
+              que está registrada no App.jsx.
             */
-            onClick={() => (window.location.hash = "contato")}
+            onClick={() => navigate("/contato")}
           >
             Falar conosco
           </Button>
@@ -178,9 +189,9 @@ export default function Header() {
 
             {/* Reaproveita o mesmo array de links do menu desktop. */}
             {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
+              <Link
+                key={link.to}
+                to={link.to}
 
                 /*
                   onClick={closeMenu} fecha o menu depois que
@@ -190,7 +201,7 @@ export default function Header() {
                 className="rounded-lg px-3 py-3 text-sm font-semibold uppercase tracking-wide text-text-muted transition-colors hover:bg-bg-card hover:text-white"
               >
                 {link.text}
-              </a>
+              </Link>
             ))}
 
             {/* Botão de contato também disponível no final do menu mobile. */}
@@ -198,8 +209,8 @@ export default function Header() {
               variant="outline"
               className="mt-3 w-full"
               onClick={() => {
-                // Navega até a seção de contato.
-                window.location.hash = "contato";
+                // Navega até a página de contato.
+                navigate("/contato");
 
                 // Fecha o menu depois do clique.
                 closeMenu();
