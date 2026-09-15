@@ -42,7 +42,7 @@ const services = [
 
 export default function Servicos() {
   return (
-    <main>
+    <>
       <section
         id="servicos"
         className="bg-bg-section px-6 py-24 sm:py-28 lg:px-12 lg:py-36"
@@ -106,6 +106,6 @@ export default function Servicos() {
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 }

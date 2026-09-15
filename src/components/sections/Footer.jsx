@@ -10,7 +10,7 @@ export default function Footer() {
   ];
 
   const contactInfo = ["E-mail", "Telefone", "São Paulo, Brasil"];
-//   const socialLinks = ["LinkedIn", "Instagram"];
+  //   const socialLinks = ["LinkedIn", "Instagram"];
 
   return (
     <footer className="bg-bg-footer border-t border-border">
@@ -28,7 +28,7 @@ export default function Footer() {
           {/* Logo + slogan */}
           <div>
             <p className="text-white text-6xl font-bold mb-3">ANOTHER WORLD</p>
-            <p className="text-text-muted text-1xl">
+            <p className="text-text-muted text-2xl">
               Conectando seu mundo ao futuro.
             </p>
           </div>
@@ -43,10 +43,12 @@ export default function Footer() {
                   Poderia ser <div>, mas <ul>/<li> é mais correto semanticamente
                   (ajuda leitores de tela e o Google a entenderem que é uma lista). */}
               {navLinks.map((link) => (
-                <li key={link} href="#" className="text-text-muted text-sm hover:text-purple transition">
+                <li key={link}>
+                  <a href="#" className="text-text-muted text-sm hover:text-purple transition">
                     {link}
+                  </a>
                 </li>
-              ))};
+              ))}
             </ul>
           </div>
 
@@ -81,7 +83,7 @@ export default function Footer() {
               ))}
             </ul>
           </div>*/}
-        </div> 
+        </div>
 
         {/* Linha divisória */}
         <div className="border-t border-border pt-8 ">
