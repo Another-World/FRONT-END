@@ -15,6 +15,9 @@
   --color-text-muted: #a39aae;
   --color-text-soft: #8f859a;
   --color-text-faint: #706878;
+
+  --color-highlight: #EFEAF6;       /* roxo bem claro, quase lilás */
+  --color-highlight-text: #160b20;  /* texto escuro, legível no fundo claro */
 }
 
 body {
