@@ -1,10 +1,7 @@
-
-
 import { useState } from "react";
 
 import SectionHeader from "../../components/ui/SectionHeader";
 import Button from "../../components/ui/Button";
-
 
 // Lista usada no <select> de serviços.
 const services = [
@@ -26,13 +23,38 @@ const initialAddress = {
   city: "",
   state: "",
 };
+function formatWhatsApp(value) {
+  const numbers = value.replace(/\D/g, "").slice(0, 11);
 
+  if (!numbers) {
+    return "";
+  }
+
+  if (numbers.length <= 2) {
+    return `(${numbers}`;
+  }
+
+  const areaCode = numbers.slice(0, 2);
+  const phone = numbers.slice(2);
+
+  if (phone.length <= 4) {
+    return `(${areaCode}) ${phone}`;
+  }
+
+  const separatorPosition = phone.length >= 9 ? 5 : 4;
+
+  return `(${areaCode}) ${phone.slice(0, separatorPosition)}-${phone.slice(
+    separatorPosition,
+  )}`;
+}
 // A URL será definida futuramente no arquivo .env.
 // Exemplo: VITE_QUOTE_API_URL=https://sua-api.com/orcamentos
 const quoteApiUrl = import.meta.env.VITE_QUOTE_API_URL;
 
 export default function Contato() {
   const [address, setAddress] = useState(initialAddress);
+
+  const [whatsapp, setWhatsapp] = useState("");
 
   const [cepStatus, setCepStatus] = useState({
     type: "",
@@ -89,9 +111,7 @@ export default function Contato() {
         message: "Buscando endereço...",
       });
 
-      const response = await fetch(
-        `https://viacep.com.br/ws/${cep}/json/`
-      );
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
 
       if (!response.ok) {
         throw new Error("Não foi possível consultar o CEP.");
@@ -103,7 +123,8 @@ export default function Contato() {
       if (data.erro) {
         setCepStatus({
           type: "error",
-          message: "CEP não encontrado. Confira o número ou preencha manualmente.",
+          message:
+            "CEP não encontrado. Confira o número ou preencha manualmente.",
         });
         return;
       }
@@ -132,7 +153,35 @@ export default function Contato() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    const cepNumbers = address.cep.replace(/\D/g, "");
+    const whatsappNumbers = whatsapp.replace(/\D/g, "");
 
+    if (cepNumbers.length !== 8) {
+      setCepStatus({
+        type: "error",
+        message: "Digite um CEP válido com 8 números.",
+      });
+
+      return;
+    }
+
+    if (cepStatus.type === "loading") {
+      setSubmitStatus({
+        type: "error",
+        message: "Aguarde a consulta do CEP terminar.",
+      });
+
+      return;
+    }
+
+    if (![10, 11].includes(whatsappNumbers.length)) {
+      setSubmitStatus({
+        type: "error",
+        message: "Digite um número de WhatsApp válido.",
+      });
+
+      return;
+    }
     const form = event.currentTarget;
 
     // Reúne todos os campos do formulário em um objeto.
@@ -180,6 +229,8 @@ export default function Contato() {
 
       form.reset();
       setAddress(initialAddress);
+      setWhatsapp("");
+
       setCepStatus({ type: "", message: "" });
     } catch {
       setSubmitStatus({
@@ -208,7 +259,7 @@ export default function Contato() {
       className="bg-bg-section px-6 py-24 sm:py-28 lg:px-12 lg:py-36"
     >
       <div className="mx-auto max-w-[1344px]">
-        <SectionHeader number="04" label="Contato" />
+        <SectionHeader number="05" label="Contato" />
 
         <div className="mt-12 grid gap-14 lg:mt-16 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
           <div>
@@ -217,8 +268,8 @@ export default function Contato() {
             </h2>
 
             <p className="mt-6 max-w-md text-base leading-8 text-text-muted sm:text-lg">
-              Preencha as informações abaixo para solicitar um orçamento.
-              Nossa equipe analisará sua necessidade e retornará por e-mail ou
+              Preencha as informações abaixo para solicitar um orçamento. Nossa
+              equipe analisará sua necessidade e retornará por e-mail ou
               WhatsApp.
             </p>
 
@@ -300,9 +351,18 @@ export default function Contato() {
                   name="whatsapp"
                   required
                   inputMode="tel"
+                  value={whatsapp}
+                  onChange={(event) =>
+                    setWhatsapp(formatWhatsApp(event.target.value))
+                  }
                   placeholder="(11) 99999-9999"
+                  aria-describedby="whatsapp-help"
                   className="border-b border-border bg-transparent py-3 text-sm text-white outline-none placeholder:text-text-faint focus:border-purple"
                 />
+
+                <span id="whatsapp-help" className="text-xs text-text-faint">
+                  Usaremos este número para confirmar o orçamento.
+                </span>
               </label>
             </div>
 
@@ -497,7 +557,10 @@ export default function Contato() {
               <Button
                 variant="solid"
                 type="submit"
-                disabled={submitStatus.type === "loading"}
+                disabled={
+                  submitStatus.type === "loading" ||
+                  cepStatus.type === "loading"
+                }
               >
                 {submitStatus.type === "loading"
                   ? "Enviando..."

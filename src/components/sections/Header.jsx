@@ -16,9 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 const links = [
   { text: "Quem somos", to: "/quem-somos" },
   { text: "Serviços", to: "/servicos" },
-  // Projetos não é uma página separada: é a seção <section id="portfolio">
-  // dentro da Home. Por isso o caminho é "/" + a âncora "#portfolio".
-  { text: "Projetos", to: "/#portfolio" },
+  { text: "Projetos", href: "/#portfolio" },
   { text: "Contato", to: "/contato" },
 ];
 
@@ -54,7 +52,6 @@ export default function Header() {
       backdrop-blur = aplica desfoque no conteúdo atrás do Header.
     */
     <header className="sticky top-0 z-50 border-b border-border bg-bg-dark/95 backdrop-blur">
-
       {/*
         Este é o container interno.
 
@@ -67,7 +64,6 @@ export default function Header() {
         justify-between = separa logo, menu e botão.
       */}
       <div className="mx-auto flex h-[82px] max-w-[1440px] items-center justify-between px-6 lg:px-12">
-
         {/*
           Logo do site.
           href="#inicio" levará a pessoa para a seção Hero,
@@ -96,28 +92,25 @@ export default function Header() {
             .map() percorre cada objeto dentro de links
             e cria um <a> para cada item.
           */}
-          {links.map((link) => (
-            <Link
-              /*
-                key é obrigatório em listas do React.
-                Ele permite que o React identifique cada item.
-              */
-              key={link.to}
-
-              // Usa o caminho definido no array.
-              to={link.to}
-
-              /*
-                text-[10px] = tamanho de texto do Figma.
-                uppercase = deixa as letras em maiúsculo.
-                hover:text-white = muda a cor ao passar o mouse.
-              */
-              className="text-[10px] font-semibold uppercase tracking-wide text-text-muted transition-colors hover:text-white"
-            >
-              {/* Exibe o texto definido no array. */}
-              {link.text}
-            </Link>
-          ))}
+          {links.map((link) =>
+            link.href ? (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-[10px] font-semibold uppercase tracking-wide text-text-muted transition-colors hover:text-white"
+              >
+                {link.text}
+              </a>
+            ) : (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-[10px] font-semibold uppercase tracking-wide text-text-muted transition-colors hover:text-white"
+              >
+                {link.text}
+              </Link>
+            ),
+          )}
         </nav>
 
         {/*
@@ -131,7 +124,6 @@ export default function Header() {
           <Button
             variant="outline"
             className="h-11 px-5 text-[10px]"
-
             /*
               Ao clicar, navega para a rota /contato,
               que está registrada no App.jsx.
@@ -154,7 +146,6 @@ export default function Header() {
           className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-text-muted transition-colors hover:border-purple hover:text-white xl:hidden"
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={menuOpen}
-
           /*
             !menuOpen significa "o oposto do valor atual":
 
@@ -186,23 +177,28 @@ export default function Header() {
           aria-label="Navegação mobile"
         >
           <div className="mx-auto flex max-w-[1440px] flex-col gap-1">
-
             {/* Reaproveita o mesmo array de links do menu desktop. */}
-            {links.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-
-                /*
-                  onClick={closeMenu} fecha o menu depois que
-                  a pessoa escolhe uma página.
-                */
-                onClick={closeMenu}
-                className="rounded-lg px-3 py-3 text-sm font-semibold uppercase tracking-wide text-text-muted transition-colors hover:bg-bg-card hover:text-white"
-              >
-                {link.text}
-              </Link>
-            ))}
+            {links.map((link) =>
+              link.href ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={closeMenu}
+                  className="rounded-lg px-3 py-3 text-sm font-semibold uppercase tracking-wide text-text-muted transition-colors hover:bg-bg-card hover:text-white"
+                >
+                  {link.text}
+                </a>
+              ) : (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={closeMenu}
+                  className="rounded-lg px-3 py-3 text-sm font-semibold uppercase tracking-wide text-text-muted transition-colors hover:bg-bg-card hover:text-white"
+                >
+                  {link.text}
+                </Link>
+              ),
+            )}
 
             {/* Botão de contato também disponível no final do menu mobile. */}
             <Button

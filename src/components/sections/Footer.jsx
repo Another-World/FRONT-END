@@ -1,93 +1,96 @@
+import { Link } from "react-router-dom";
+
+// Links reais do site.
+// "Projetos" é uma seção da Home, por isso usa uma âncora.
+const navLinks = [
+  { label: "Início", to: "/" },
+  { label: "Quem somos", to: "/quem-somos" },
+  { label: "Serviços", to: "/servicos" },
+  { label: "Projetos", href: "/#portfolio" },
+  { label: "Contato", to: "/contato" },
+];
+
 export default function Footer() {
-  // Duas listas de dados — em vez de escrever cada linha do rodapé na mão,
-  // guardamos os textos em arrays e deixamos o .map() desenhar.
-  const navLinks = [
-    "Quem somos",
-    "Serviços",
-    "Projetos",
-    "Parceiros",
-    "Contato",
-  ];
-
-  const contactInfo = ["E-mail", "Telefone", "São Paulo, Brasil"];
-  //   const socialLinks = ["LinkedIn", "Instagram"];
-
   return (
-    <footer className="bg-bg-footer border-t border-border">
-      {/* "border-t" = borda só em cima (top), separando o footer do resto da página. */}
-
-      <div className="max-w-7xl mx-auto px-8 py-16">
-        {/* Mesmo container padrão que usamos no Hero: largura máxima + centralizado. */}
-
-        {/* Bloco de cima: logo + colunas, lado a lado */}
-        <div className="flex flex-col md:flex-row justify-between gap-12 mb-12">
-          {/* "flex-col md:flex-row" = empilha no celular, coloca lado a lado
-              a partir de tablet/desktop. Isso é o que faz o footer virar
-              uma coluna só quando a tela é pequena. */}
-
-          {/* Logo + slogan */}
+    <footer className="border-t border-border bg-bg-footer">
+      <div className="mx-auto max-w-[1344px] px-6 py-14 sm:py-16 lg:px-12">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.5fr_0.7fr_0.8fr]">
+          {/* Identidade da empresa */}
           <div>
-            <p className="text-white text-6xl font-bold mb-3">ANOTHER WORLD</p>
-            <p className="text-text-muted text-2xl">
-              Conectando seu mundo ao futuro.
+            <Link
+              to="/"
+              className="text-3xl font-bold tracking-[-0.04em] text-white transition-colors hover:text-purple sm:text-4xl"
+            >
+              ANOTHER WORLD
+            </Link>
+
+            <p className="mt-4 max-w-xs text-sm leading-7 text-text-muted">
+              Conectando seu mundo ao futuro por meio de tecnologia,
+              infraestrutura e desenvolvimento web.
             </p>
           </div>
 
-          {/* Coluna Navegação */}
+          {/* Navegação */}
           <div>
-            <p className="text-purple text-xs font-semibold uppercase tracking-widest mb-4">
+            <h2 className="text-[10px] font-semibold uppercase tracking-[0.16em] text-purple">
               Navegação
-            </p>
-            <ul className="flex flex-col gap-3">
-              {/* <ul> = "unordered list", a tag certa pra uma lista de itens.
-                  Poderia ser <div>, mas <ul>/<li> é mais correto semanticamente
-                  (ajuda leitores de tela e o Google a entenderem que é uma lista). */}
+            </h2>
+
+            <ul className="mt-5 flex flex-col gap-3">
               {navLinks.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-text-muted text-sm hover:text-purple transition">
-                    {link}
-                  </a>
+                <li key={link.label}>
+                  {link.href ? (
+                    /*
+                      Usamos <a> neste caso porque a âncora #portfolio fica
+                      dentro da Home. Assim o navegador abre a Home e rola
+                      até a seção correta.
+                    */
+                    <a
+                      href={link.href}
+                      className="text-sm text-text-muted transition-colors hover:text-white"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.to}
+                      className="text-sm text-text-muted transition-colors hover:text-white"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Coluna Contato */}
+          {/* Contato */}
           <div>
-            <p className="text-purple text-xs font-semibold uppercase tracking-widest mb-4">
-              Contato
-            </p>
-            <ul className="flex flex-col gap-3">
-              {contactInfo.map((info) => (
-                <li key={info} className="text-text-muted text-sm">
-                  {info}
-                </li>
-              ))}
-            </ul>
-          </div>
+            <h2 className="text-[10px] font-semibold uppercase tracking-[0.16em] text-purple">
+              Orçamentos
+            </h2>
 
-          {/* Coluna Social
-          <div>
-            <p className="text-purple text-xs font-semibold uppercase tracking-widest mb-4">
-              Social
+            <p className="mt-5 text-sm leading-7 text-text-muted">
+              Solicite um orçamento e nossa equipe retornará por e-mail ou
+              WhatsApp.
             </p>
-            <ul className="flex flex-col gap-3">
-              {socialLinks.map((social) => (
-                <li key={social}
-                  
-                    href="#"
-                    className="text-text-muted text-sm hover:text-purple transition"
-                  >
-                    {social}
-                </li>
-              ))}
-            </ul>
-          </div>*/}
+
+            <Link
+              to="/contato"
+              className="mt-5 inline-flex text-sm font-semibold text-white transition-colors hover:text-purple"
+            >
+              Solicitar orçamento →
+            </Link>
+
+            <p className="mt-6 text-sm text-text-faint">
+              São Paulo, Brasil
+            </p>
+          </div>
         </div>
 
-        {/* Linha divisória */}
-        <div className="border-t border-border pt-8 ">
-          <p className="text-text-faint text-xs ">
+        {/* Copyright */}
+        <div className="mt-14 border-t border-border pt-7">
+          <p className="text-xs text-text-faint">
             © 2026 Another World. Todos os direitos reservados.
           </p>
         </div>
