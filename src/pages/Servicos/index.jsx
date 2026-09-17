@@ -20,24 +20,7 @@ const services = [
     description:
       "Criação de sites e aplicações web responsivas, modernas e alinhadas às necessidades do negócio.",
   },
-  {
-    number: "04",
-    title: "Suporte Técnico",
-    description:
-      "Atendimento técnico para identificar problemas, orientar usuários e manter os sistemas funcionando.",
-  },
-  {
-    number: "05",
-    title: "Infraestrutura",
-    description:
-      "Organização e estruturação de ambientes de tecnologia preparados para acompanhar o crescimento da empresa.",
-  },
-  {
-    number: "06",
-    title: "Segurança",
-    description:
-      "Soluções e boas práticas para proteger equipamentos, redes e informações importantes.",
-  },
+  
 ];
 
 export default function Servicos() {
