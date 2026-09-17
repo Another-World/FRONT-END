@@ -66,29 +66,7 @@ export default function Servicos() {
         </div>
       </section>
 
-      <section className="border-t border-border bg-bg-dark px-6 py-24 sm:py-28 lg:px-12 lg:py-32">
-        <div className="mx-auto max-w-[1344px]">
-          <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-20">
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-purple">
-                Nosso compromisso
-              </span>
-
-              <h2 className="mt-4 max-w-3xl text-3xl font-semibold leading-tight tracking-[-0.03em] text-white sm:text-4xl lg:text-5xl">
-                Mais do que oferecer tecnologia, queremos entregar soluções
-                que realmente funcionam.
-              </h2>
-            </div>
-
-            <a
-              href="#contato"
-              className="inline-flex h-12 items-center justify-center rounded-lg border border-border px-6 text-sm font-semibold text-white transition-colors hover:border-purple hover:text-purple"
-            >
-              Falar conosco ↗
-            </a>
-          </div>
-        </div>
-      </section>
     </>
+    
   );
 }
